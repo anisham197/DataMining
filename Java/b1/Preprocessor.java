@@ -32,8 +32,7 @@ public class Preprocessor {
     public void discretization(int col, String outputfile){
         try {
             FileWriter writer = new FileWriter(outputfile);
-            for(int i = 0; i < data.size(); i++){
-                String row[] = data.get(i);
+            for(String row[] : data ){
                 Float value = Float.parseFloat(row[col]);
                 writer.write(printRow(row)+",");
                 String discreteValue = "";
@@ -61,9 +60,7 @@ public class Preprocessor {
 
     public ArrayList<String[]> stratifiedSample(int sampsize){
          HashMap<String, ArrayList<String[]>> genderMap = new HashMap<>();
-         for(int i = 0; i < data.size(); i++){
-            String row[] = data.get(i);
-
+         for(String row[] : data ){
             ArrayList<String[]> results = genderMap.get(row[4]);
             if (results != null){
                 results.add(row);
@@ -92,8 +89,7 @@ public class Preprocessor {
 
     public void aggregation(int group_col, int value_col) {
         HashMap<String, Float[]> genderAgg = new HashMap<>();
-         for(int i = 0; i < data.size(); i++){
-            String row[] = data.get(i);
+        for(String row[] : data ){
             if(genderAgg.containsKey(row[group_col])){
                 Float minmax[] = genderAgg.get(row[group_col]);
                 Float value = Float.parseFloat(row[value_col]);
