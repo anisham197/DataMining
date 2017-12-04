@@ -25,16 +25,16 @@ sapply(data,function(x) sum(is.na(x)))
 
 #See statistics
 summary(data)
-mean(mydata$Sepal.Length)
-median(mydata$Sepal.Width)
-range(mydata$Petal.Length)
-quantile(mydata$Petal.Width)
-quantile(mydata$Petal.Width,c(0.1, 0.5, 0.65))
-var(mydata$Sepal.Length) #variance
+mean(data$Sepal.Length)
+median(data$Sepal.Width)
+range(data$Petal.Length)
+quantile(data$Petal.Width)
+quantile(data$Petal.Width,c(0.1, 0.5, 0.65))
+var(data$Sepal.Length) #variance
 
 #covarience and correlation
-cov(mydata$Sepal.Length, mydata$Petal.Length)
-cor(mydata$Sepal.Length, mydata$Petal.Length)
+cov(data$Sepal.Length, data$Petal.Length)
+cor(data$Sepal.Length, data$Petal.Length)
 
 #Plots
 hist(data$Sepal.Length)
@@ -45,7 +45,7 @@ barplot(table(data$Sepal.Width))
 
 
 #boxplot: shows min, first quarile, median, third quartile and max
-boxplot(Sepal.Length ~ Species, data=mydata, xlab="Species", ylab="Sepal.Length")
+boxplot(Sepal.Length ~ Species, data=data, xlab="Species", ylab="Sepal.Length")
 
 #scatter plot: drawn for 2 numeric values. col = colours in the plot, pch = shapes for plot
 plot(data$Sepal.Length, data$Sepal.Width, col=data$Species, pch=c(15,16,17) )

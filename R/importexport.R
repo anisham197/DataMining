@@ -4,7 +4,7 @@ name<- sample(c('Alice', 'Steve', 'Joe' , 'Louis', 'Kathy'), 15, replace=TRUE)
 percent <- sample(c(0.9, 0.8, 0.7, 0.6, 0.5), 15, replace = TRUE)
 level <- sample( 1:6, 15, replace = TRUE)
 label <- sample(c(TRUE, FALSE), 15, replace=TRUE, prob=c(0.6,0.4))
-data <- data.frame(grade, name, percent, num, label)
+data <- data.frame(grade, name, percent, level, label)
 
 #Write to and read from csv file
 write.csv(data, "./data.csv", row.names = FALSE)

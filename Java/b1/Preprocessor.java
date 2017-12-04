@@ -16,7 +16,7 @@ public class Preprocessor {
             String line;
             while( (line = reader.readLine()) != null ){
                 String row[] = line.split(",");
-                this.data.add(row);
+                data.add(row);
             }
         }
         catch (IOException e){
