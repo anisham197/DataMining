@@ -1,3 +1,4 @@
+library(ggplot2)
 #K-MEANS CLUSTERING
 
 #plot initial data
@@ -18,7 +19,6 @@ table(irisCluster$cluster, iris$Species)
 
 #plot predicted data
 irisCluster$cluster <- as.factor(irisCluster$cluster)
-library(ggplot2)
 ggplot(iris, aes(Petal.Length, Petal.Width, color = irisCluster$cluster)) + geom_point()
 
 

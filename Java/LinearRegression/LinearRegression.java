@@ -1,59 +1,74 @@
 import java.io.*;
 import java.util.*;
 
-public class LinearRegression
-{
+public class LinearRegression {
     double M, C;
+    ArrayList<Double> x, y;
 
-    public LinearRegression(){
+    public LinearRegression (String filename) {
         M = 0;
         C = 0;
+        x = new ArrayList<>();
+        y = new ArrayList<>();
+        parseCSV(filename);
     }
 
-    public double covariance(double[] x, double[] y) {
-        double xmean = mean(x);
-        double ymean = mean(y);
-        double result = 0;
-        for (int i = 0; i < x.length; i++) {
-            result += ( (x[i] - xmean) * (y[i] - ymean) );
+    public void parseCSV(String filename) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+            String line;
+            while( (line = reader.readLine()) != null ) {
+                String row[] = line.split(",");
+                x.add(Double.parseDouble( row[0] ));
+                y.add(Double.parseDouble( row[1] ));
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Double covariance() {
+        Double xmean = mean(x);
+        Double ymean = mean(y);
+        Double result = 0.0;
+        for (int i = 0; i < x.size(); i++) {
+            result += ( (x.get(i) - xmean) * (y.get(i) - ymean) );
         }
         return result;
     }
 
-    public double mean(double[] data){
-        double sum = 0;
-        for (int i = 0; i < data.length; i++) {
-            sum += data[i];
+    public Double mean(ArrayList<Double> data){
+        Double sum = 0.0;
+        for (int i = 0; i < data.size(); i++) {
+            sum += data.get(i);
         }
-        return sum / data.length;
+        return sum / data.size();
     }
 
-    public double variance(double[] x)
-    {
-        double xmean = mean(x);
-        double result = 0;
-        for (int i = 0; i < x.length; i++) {
-            result += Math.pow(x[i] - xmean, 2);
+    public Double variance() {
+        Double xmean = mean(x);
+        Double result = 0.0;
+        for (int i = 0; i < x.size(); i++) {
+            result += Math.pow(x.get(i) - xmean, 2);
         }
         return result;
     }
 
-    public void coefficients(double[] x, double[] y)
-    {
-        M = covariance(x,y) / variance(x);
-        C = mean(y) - M * mean(x);
+    public void coefficients() {
+        M = covariance() / variance(); // covariance(x, y) / variance(x);
+        C = mean(y) - M * mean(x); 
     } 
 
-    public double predict(double x){
-        return ( x*M + C);
+    public double predict(Double x) {
+        return ( M * x + C);
     }
 
     public static void main(String[] args) {
-        double[] x = { 2, 3, 4, 5, 6, 8, 10, 11 };
-        double[] y = { 5, 7, 9, 11, 13, 17, 21, 23};
-
-        LinearRegression lr = new LinearRegression();
-        lr.coefficients(x,y);
-        System.out.println(lr.predict(9));
+        String filename = "data.csv";
+        Double point = 9.0;
+        LinearRegression lr = new LinearRegression (filename);
+        lr.coefficients();
+        System.out.println( lr.predict(point) );
     }   
 }

@@ -40,7 +40,7 @@ confusionMatrix(test_predictions, test$class, positive="malignant")
 
 #NAIVE BAYES CLASSIFIER
 
-#Obtain a decision tree model
+#Obtain a naive bayes model
 model2 <- naiveBayes(features, data=train)
 
 #Model Summary

@@ -11,8 +11,7 @@ public class DistanceID implements Comparable<DistanceID>
     }
 
     @Override
-    public int compareTo(DistanceID d)
-    {
+    public int compareTo(DistanceID d) {
         if(distance == d.distance)
             return 0;
         else if(distance > d.distance)
