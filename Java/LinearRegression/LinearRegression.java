@@ -40,8 +40,8 @@ public class LinearRegression {
 
     public Double mean(ArrayList<Double> data){
         Double sum = 0.0;
-        for (int i = 0; i < data.size(); i++) {
-            sum += data.get(i);
+        for (Double point : data) {
+            sum += point;
         }
         return sum / data.size();
     }
@@ -49,8 +49,8 @@ public class LinearRegression {
     public Double variance() {
         Double xmean = mean(x);
         Double result = 0.0;
-        for (int i = 0; i < x.size(); i++) {
-            result += Math.pow(x.get(i) - xmean, 2);
+        for (Double point : x) {
+            result += Math.pow(point - xmean, 2);
         }
         return result;
     }
@@ -69,6 +69,6 @@ public class LinearRegression {
         Double point = 9.0;
         LinearRegression lr = new LinearRegression (filename);
         lr.coefficients();
-        System.out.println( lr.predict(point) );
+        System.out.println("For x = " + point + ", y = " + lr.predict(point) );
     }   
 }

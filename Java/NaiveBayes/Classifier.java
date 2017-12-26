@@ -79,18 +79,16 @@ public class Classifier {
 		double att1 = sc.nextDouble();
 		String att2 = sc.next();
 
-		double posteriorProb[] = new double[2];
-
 		for(int i = 0; i < label.length; i++) {
 			double exp = -1 * ( Math.pow((att1 - label[i].mean), 2)/(2 * label[i].variance) );
 			double prob = Math.exp(exp) / Math.sqrt(2 * 3.14 * label[i].variance) ;
 
             double conditionalProb = prob * label[i].getProbability(att2);
-			posteriorProb[i] = conditionalProb * label[i].prior ;
-			System.out.println("Probability of class: " + i + " = " + posteriorProb[i]);
+			label[i].posteriorProb = conditionalProb * label[i].prior ;
+			System.out.println("Probability of class: " + i + " = " + label[i].posteriorProb);
 		}
 
-		System.out.println("New record belongs to class " + ( (posteriorProb[0] > posteriorProb[1]) ? 0 : 1 ) );
+		System.out.println("New record belongs to class " + ( (label[0].posteriorProb > label[1].posteriorProb) ? 0 : 1 ) );
 	}
     
     public static void main (String[] args)	{

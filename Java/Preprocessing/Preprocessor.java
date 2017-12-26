@@ -34,7 +34,7 @@ public class Preprocessor {
             FileWriter writer = new FileWriter(outputfile);
             for(String row[] : data ){
                 Float value = Float.parseFloat(row[col]);
-                writer.write(printRow(row)+",");
+                writer.write(printRow(row) + ",");
                 String discreteValue = "";
                 if(value < 200)
                     discreteValue = "A";
@@ -49,7 +49,7 @@ public class Preprocessor {
                 else
                     discreteValue = "F";
 
-                writer.write(discreteValue+"\n");
+                writer.write(discreteValue + "\n");
             }
             writer.close();
         }
@@ -61,7 +61,8 @@ public class Preprocessor {
     public ArrayList<String[]> stratifiedSample(int sampsize){
          HashMap<String, ArrayList<String[]>> genderMap = new HashMap<>();
          for(String row[] : data ){
-            ArrayList<String[]> results = genderMap.get(row[4]);
+            String gender = row[4];
+            ArrayList<String[]> results = genderMap.get(gender);
             if (results != null){
                 results.add(row);
             }
@@ -69,7 +70,7 @@ public class Preprocessor {
                  results = new ArrayList<>();
                  results.add(row);
             }
-            genderMap.put(row[4],results);
+            genderMap.put(gender, results);
         }
 
         ArrayList<String[]> stratifiedSample = new ArrayList<>();
@@ -108,18 +109,14 @@ public class Preprocessor {
 
         for (String key : genderAgg.keySet()){
              Float[] value = genderAgg.get(key);
-             System.out.println("Gender: "+key+" Min: "+value[0] + " Max: " + value[1]);
+             System.out.println("Gender: " + key + " Min: " + value[0] + " Max: " + value[1]);
         }
 
     }
 
     public static void main(String args[]){
-        if(args.length != 1){
-            System.out.println("Usage: java Preprocessor <input.csv>");
-            return;
-        }
-
-        Preprocessor dataProcessor = new Preprocessor(args[0]);
+        String filename = "dataset.csv";
+        Preprocessor dataProcessor = new Preprocessor(filename);
         dataProcessor.aggregation(4, 2);
         dataProcessor.discretization(5, "output.csv");
         ArrayList<String[]> sample = dataProcessor.stratifiedSample(10);

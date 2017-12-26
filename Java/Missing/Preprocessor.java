@@ -29,9 +29,9 @@ public class Preprocessor {
         return new_row.substring(1, new_row.length() - 1);
     }
 
-    public void handleMissing (int col, String naIndicator, Boolean isNumeric,Boolean isInteger){
+    public void handleMissing (int col, String naIndicator, Boolean isNumeric, Boolean isInteger){
         ArrayList<String[]> new_data = new ArrayList<>();
-        if (isNumeric){
+        if (isNumeric) {
             float meanValue = 0;
             for(String row[] : data ){
                 if(!row[col].equalsIgnoreCase(naIndicator))
@@ -50,26 +50,30 @@ public class Preprocessor {
                 new_data.add(row);
             }
         }
-        else 
-        {
+        else {
             HashMap<String,Integer> freqMatrix = new HashMap<>();
             for(String row[] : data ){
                 if(!row[col].equalsIgnoreCase(naIndicator)){
                     Integer count = freqMatrix.get(row[col]);
                     if(count == null) count = new Integer(0);
                     count++;
-                    freqMatrix.put(row[col],count);
+                    freqMatrix.put(row[col], count);
                 }
             }
-            Map.Entry<String,Integer> mostFrequent = null;
-            for(Map.Entry<String,Integer> e : freqMatrix.entrySet()){
-                if (mostFrequent == null || e.getValue() > mostFrequent.getValue())
-                    mostFrequent = e;
+
+            String label = "";
+            int max = -1;
+            for (String key : freqMatrix.keySet()){
+                if(freqMatrix.get(key) > max ){
+                    max = freqMatrix.get(key);
+                    label = key;
+                }
             }
-            System.out.println("Replacement for missing in col: "+ (col+1) +" is: "+ mostFrequent.getKey());
+
+            System.out.println("Replacement for missing in col: " + (col+1) + " is: " + label);
             for(String row[] : data ){
                 if(row[col].equalsIgnoreCase(naIndicator)){
-                    row[col] = mostFrequent.getKey();
+                    row[col] = label;
                 }
                 new_data.add(row);
             }
@@ -78,7 +82,7 @@ public class Preprocessor {
     }
 
     public void writeCSV(String filename){
-        try{
+        try {
             FileWriter writer = new FileWriter(filename);
             for (String[] row : data){
                 writer.write(printRow(row));
@@ -91,17 +95,11 @@ public class Preprocessor {
         }
     }
 
-
     public static void main(String args[]){
-        if(args.length != 1){
-            System.out.println("Usage: java Preprocessor <input.csv>");
-            return;
-        }
-
-        Preprocessor processor = new Preprocessor(args[0]);
+        String filename = "missing.csv";
+        Preprocessor processor = new Preprocessor(filename);
         processor.handleMissing(1, "NA", true, true);//age
         processor.handleMissing(5, "NA", false, false);//month
-        processor.writeCSV("afterMissing.csv");
-
+        processor.writeCSV("afterMissing2.csv");
     }
 }

@@ -62,7 +62,6 @@ public class Perceptron {
     public void printWeights() {
         String w = Arrays.toString(weights);
         System.out.println(w.substring(1, w.length() - 1));
-        
     }
 
     public void learnWeights() {
@@ -90,6 +89,4 @@ public class Perceptron {
     public double activation(Double x) {
         return (x >= 0) ? 1 : 0;
     }
-
-
 }

@@ -59,14 +59,12 @@ public class BestSplit {
         System.out.println("Attribute 2 Table:");
         System.out.println(a2);
 
-        System.out.println("I(Parent) - Gini:");        
-        System.out.println(giniParent);        
+        System.out.println("I(Parent) - Gini:" + giniParent);        
         System.out.println("Gain - Gini");
         System.out.println("Attribute 1: " + gain_gini_A1 );        
         System.out.println("Attribute 2: " + gain_gini_A2 );
 
-        System.out.println("I(Parent) - Entropy:");
-        System.out.println(entropyParent);
+        System.out.println("I(Parent) - Entropy: " + entropyParent);
         System.out.println("Gain - Entropy");
         System.out.println("Attribute 1: " + gain_entropy_A1 );        
         System.out.println("Attribute 2: " + gain_entropy_A2 );

@@ -8,8 +8,4 @@ public class Record {
 		this.att2 = att2;
 		this.label = label;
 	}
-
-	void printRecord(){
-		System.out.println(this.att1 + "\t" + this.att2 + "\t" + this.label);
-	}
 }

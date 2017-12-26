@@ -2,17 +2,18 @@ import java.io.*;
 import java.util.*;
 
 public class KNNClassifier {
-    int k;
+    int k, dimensions;
     ArrayList<Double[]> data;
     ArrayList<DistanceID> distances;
     Integer neighbours[];
 
-    public KNNClassifier(String filename){
+    public KNNClassifier(String filename, int k){
         data = new ArrayList<>();
-        k = 3;
-        parseCSV(filename);
         distances = new ArrayList<>();
         neighbours = new Integer[k];
+        this.k = k;
+        parseCSV(filename);
+        dimensions = data.get(0).length - 1;
     }
 
     public void parseCSV(String filename) {
@@ -39,25 +40,16 @@ public class KNNClassifier {
         for ( int i = 0; i < data.size(); i++){
             Double point[] = data.get(i);
             Double dist = EuclideanDistance(point, new_row);
-            // double dist = ManhattanDistance(point, new_row);  
             distances.add(new DistanceID(dist, i));           
         }
     }
 
     public double EuclideanDistance(Double[] first, Double[] second){
         double sum = 0;
-        for( int i = 0; i < second.length; i++ ){
+        for( int i = 0; i < dimensions; i++ ){
             sum += Math.pow( (first[i]-second[i]) , 2);
         }
         return Math.sqrt(sum);
-    }
-
-     public double ManhattanDistance(Double[] first, Double[] second){
-        double sum = 0;
-        for( int i = 0; i < second.length; i++ ){
-            sum += Math.abs( (first[i]-second[i]) );
-        }
-        return sum;
     }
 
     public void nearestNeighbours() {
@@ -65,7 +57,6 @@ public class KNNClassifier {
         for(int i = 0; i < k; i++){
             neighbours[i] = distances.get(i).id;
         }
-        // System.out.println("" + neighbours[0] + " " + neighbours[1] + " " + neighbours[2]);
     }
 
     public Double predict() {
@@ -81,10 +72,10 @@ public class KNNClassifier {
 
         Integer max = -1;
         Double class_label = -1.0;
-        for (Map.Entry<Double, Integer> entry : classCount.entrySet()) {
-            if ( entry.getValue() > max) {
-                max = entry.getValue();
-                class_label = entry.getKey();
+        for (Double key : classCount.keySet()) {
+            if ( classCount.get(key) > max) {
+                max = classCount.get(key);
+                class_label = key;
             }
         }
         return class_label;
@@ -92,7 +83,8 @@ public class KNNClassifier {
     
     public static void main(String[] args) {
         String filename = "data.csv";
-        KNNClassifier knn = new KNNClassifier(filename);
+        int k = 3; 
+        KNNClassifier knn = new KNNClassifier(filename, k);
 
         Double[] new_row = {6.0,3.5,4.1};
         knn.calculateDistance(new_row);

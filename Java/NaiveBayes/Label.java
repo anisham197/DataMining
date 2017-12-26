@@ -3,7 +3,7 @@ import java.util.*;
 public class Label {
 	ArrayList<Record> data;
 	HashMap<String, Double> probability;
-	double mean, variance, prior;
+	double mean, variance, prior, posteriorProb;
 
 	public Label() {
 		data = new ArrayList<>();
@@ -11,6 +11,7 @@ public class Label {
 		mean = 0.0;
 		variance = 0.0;
 		prior = 0.0;
+		posteriorProb = 0.0;
 	}
 
 	void addRecord(Record record) {

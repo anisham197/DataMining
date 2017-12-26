@@ -86,7 +86,7 @@ public class KMeans {
                 cluster.add(point);
                 clusterData.put(cluster_index, cluster);
             }
-            recomputeCentroid(clusterData);
+            recomputeCentroids(clusterData);
         }
         finalClusters = clusterData;
     }
@@ -115,7 +115,7 @@ public class KMeans {
         }
     }
 
-    public void recomputeCentroid(HashMap<Integer, ArrayList<Double[]>> clusterData){        
+    public void recomputeCentroids(HashMap<Integer, ArrayList<Double[]>> clusterData){        
         centroids = new ArrayList<>();
         for(int i = 0; i < k; i++){
             ArrayList<Double[]> clusterPoints = clusterData.get(i);
