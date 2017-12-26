@@ -7,8 +7,8 @@ View(Orange)
 
 data <- Orange
 
-age <- data[1:7,2:2]
-circum <- data[1:7,3:3]
+age <- data[1:7,2]
+circum <- data[1:7,3]
 
 plot(age, circum, xlab = "age", ylab = "circumference", col = "red", pch = 19, main = "Circumference vs Age of Orange Trees")
 

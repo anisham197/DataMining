@@ -13,14 +13,11 @@ irisCluster
 predict_class <- fitted(irisCluster, method = c("classes"))
 
 #compare predicted class vs actual class
-data <- data.frame(iris$Species, predict_class)
-data
 table(irisCluster$cluster, iris$Species)
 
 #plot predicted data
 irisCluster$cluster <- as.factor(irisCluster$cluster)
 ggplot(iris, aes(Petal.Length, Petal.Width, color = irisCluster$cluster)) + geom_point()
-
 
 
 #HEIRARCHIAL CLUSTERING

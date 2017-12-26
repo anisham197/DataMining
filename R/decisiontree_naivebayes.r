@@ -16,7 +16,6 @@ library(e1071)  #Contains the naive bayes functions
 data <- biopsy
 View(data)
 
-
 #Split dataset into test and train
 index <- sample(2, nrow(data), replace=TRUE, prob=c(0.7,0.3))
 train <- data[index==1,]

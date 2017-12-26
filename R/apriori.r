@@ -39,5 +39,5 @@ milk_rhs_rules <- subset(basket_rules, rhs %pin% "whole milk")
 inspect(milk_rhs_rules)
 
 #graph of the rules
-plot(basket_rules,method = "graph")
+plot(basket_rules, method = "graph")
 
