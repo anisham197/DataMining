@@ -1,0 +1,14 @@
+=ROW(A1) // serial number
+=IF(RAND() > 0.2, RANDBETWEEN(10,20), "NA" )
+=RANDBETWEEN(500,1300)
+=CHOOSE(RANDBETWEEN(1,2), "male","female" )
+=ROUND(RAND(), 3) + RANDBETWEEN(100,1000)
+=IF(RAND() > 0.2, (CHOOSE(RANDBETWEEN(1,12), "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")), "NA")
+
+
+8	14	1143	female	642.961	SEP																			
+9	NA	1245	female	317.757	JUL
+10	NA	1192	female	236.848	MAY
+11	12	800	    female	128.109	NA
+12	11	1254	male	350.902	DEC
+13	10	520	    female	218.437	JUN
